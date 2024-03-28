@@ -1,3 +1,31 @@
-h2 {
-    text-transform: capitalize;
+
+.full-path {
+    position: relative;
+    width: 40%;
+    height: 60%;
+    margin: 5% 5% 0 5%;
+    display: inline-grid;
+    justify-items: center;
+    grid-template-rows: 8% 23% 23% 23% 23% ;
+}
+
+.full-path-h2 {
+    font-size: smaller;
+    font-weight: 500;
+    color: rgb(201, 198, 198);
+    opacity: 90%;
+}
+
+@media (min-width:800px) {
+    
+    .full-path {
+        position: relative;
+        height: calc(50vh - 43px);
+        width: 65vw;
+        margin: 0;
+        padding-left: 5vw;
+        align-items: center;
+        grid-template-columns: 20% 20% 20% 20% 20% ;
+        grid-template-rows: 100%;
+    }
 }

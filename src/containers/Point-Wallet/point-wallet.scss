@@ -1,3 +1,40 @@
+
 .point-wallet-wrapper {
+    background-color: rgb(6, 7, 9);
+    opacity: 80%;
+    display: grid;
+    align-content: center;
+    justify-items: center;
+    text-align: center;
+    padding: 15px;
+    margin: 0px 20% 0px 20% ;
     
+    box-shadow: 0 0 3px rgb(55, 55, 55);
+}
+
+h3 {
+    font-style: unset;
+    color: rgb(67, 113, 141);
+    font-weight: 200;
+    font-size: x-large;
+    padding: 0;
+    margin: 0;
+}
+
+.ratio {
+    font-size: x-large;
+    font-weight: 400;
+}
+
+@media (min-width:800px) {
+
+    .point-wallet-wrapper {
+        position: absolute;
+        display: inline-grid;
+        align-self: center;
+        height: 10vh;
+        width: 18vw;
+        margin: calc(45vh + 3%) 1vw;
+        top: 0;
+    }
 }

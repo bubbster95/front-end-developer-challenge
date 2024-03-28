@@ -3,18 +3,18 @@ import './full-path.scss';
 
 
 import Rune from '../../components/Rune/rune'
+import { useContext } from 'react';
 
-let runeArray = [
-    [{id: 1, purchased: 1}, {id: 2, purchased: 1}, {id: 3, purchased: 0}, {id:4, purchased: 0}],
-    [{id: 5, purchased: 0}, {id: 6, purchased: 0}, {id: 7, purchased: 0}, {id:8, purchased: 0}]
-]
+import { RunesContext } from '../../pages/Skill-Tree/skill-tree';
+
 
 function FullPath({path}) {
+  let runeArray = useContext(RunesContext)
   return (
     <div className="full-path">
-        <h2 className='full-path-h2'>Talent Path {path}</h2>
-        <GrayBar></GrayBar>
+        <h2 className='full-path-h2'>TALENT PATH {path}</h2>
         {runeArray[path === '1'? 0:1].map( rune =>  <Rune key={`rune-${rune.id}`} rune={rune} ></Rune> )}
+        <GrayBar runeArray={runeArray[path === '1'? 0:1]}></GrayBar>
     </div>
   );
 }
