@@ -1,6 +1,6 @@
-import GrayBar from "../Gray-Bar/gray-bar";
-import "./full-path.scss";
 
+import "./full-path.scss";
+import GrayBar from "../../components/Gray-Bar/gray-bar";
 import Rune from "../../components/Rune/rune";
 import { useContext } from "react";
 

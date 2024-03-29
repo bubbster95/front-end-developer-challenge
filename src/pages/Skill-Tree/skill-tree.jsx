@@ -11,6 +11,8 @@ export const RunesContext = createContext([]);
 
 function SkillTreePage() {
   const [wallet, setWallet] = useState({ spent: 0, total: 6 });
+  const [animateRune, setAnimateRune] = useState({ runeId: "" });
+  const [pointsFull, setPointsFull] = useState(false);
   const [runes, setRunes] = useState({
     path1: {
       1: 0,
@@ -27,9 +29,7 @@ function SkillTreePage() {
   });
 
   useEffect(() => {
-    console.log("Use Effect", runes);
     checkWallet();
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [runes]);
 
@@ -49,7 +49,20 @@ function SkillTreePage() {
       setRunes({ ...runes, [path]: { ...runes[path], [runeId]: 1 } });
     } else {
       // Invalid Rune Purchase
-      // TODO: Singal User
+      if (totalSpent >= wallet.total) setPointsFull(true);
+      setAnimateRune(runeId);
+
+      let frame = 0;
+      let animationTimer = setInterval(() => {
+        if (frame >= 30) {
+          console.log("exit Animation");
+          setAnimateRune("");
+          setPointsFull(false);
+          clearInterval(animationTimer);
+        } else {
+          frame++;
+        }
+      }, 30);
     }
   };
 
@@ -91,7 +104,9 @@ function SkillTreePage() {
       className="skill-tree-page"
       style={{ backgroundImage: 'url("assets/talent-calc-bg.png")' }}
     >
-      <RunesContext.Provider value={{ runes, handleRuneUpdate }}>
+      <RunesContext.Provider
+        value={{ runes, handleRuneUpdate, animateRune, pointsFull }}
+      >
         <TitleBar></TitleBar>
         <div className="skill-tree-wrapper">
           <FullPath path="1"></FullPath>

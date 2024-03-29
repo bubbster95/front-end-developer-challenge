@@ -6,6 +6,7 @@ import { useContext } from "react";
 
 function Rune({ purchased, runeId, path }) {
   let handleRuneUpdate = useContext(RunesContext).handleRuneUpdate;
+  let animateRune = useContext(RunesContext).animateRune
 
   let runeXOffset = JSON.parse(runeId);
   let runeYOffset = purchased;
@@ -17,7 +18,6 @@ function Rune({ purchased, runeId, path }) {
   };
 
   const handleClick = (e) => {
-    console.log("Eeee: ", e);
     // TODO: make this detect right and left click
     handleRuneUpdate(`path${path}`, runeId);
   };
@@ -25,7 +25,7 @@ function Rune({ purchased, runeId, path }) {
   return (
     <div
       onClick={(e) => handleClick(e)}
-      className={`rune-wrapper  ${purchased === 1 && "active-rune-wrapper"}`}
+      className={`rune-wrapper  ${purchased === 1 && "active-rune-wrapper"} ${animateRune === runeId && "invalid-rune"}`}
     >
       <div
         className={`rune-icon ${purchased === 1 && "active-rune-icon"}`}

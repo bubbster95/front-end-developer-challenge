@@ -5,6 +5,11 @@ $rune-size: 50px;
   position: relative;
   width: $rune-size + $rune-border;
   height: $rune-size + $rune-border;
+  display: inline-flex;
+  margin: 10px;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
   background: linear-gradient(
     to top,
     #ffffff,
@@ -13,11 +18,6 @@ $rune-size: 50px;
     #929292 50%,
     #b8b8b8 100%
   );
-  display: inline-flex;
-  margin: 10px;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
 }
 
 .rune-wrapper::after {
@@ -43,6 +43,23 @@ $rune-size: 50px;
   }
   100% {
     bottom: -100px;
+  }
+}
+
+.invalid-rune {
+  animation: invalidShake 0.2s none 0s infinite alternate;
+  box-shadow: 0 0 10px 1px rgb(123, 19, 19);
+}
+
+@keyframes invalidShake {
+  0% {
+    left: -1px;
+  }
+  50% {
+    left: 1px;
+  }
+  100% {
+    left: -1px;
   }
 }
 

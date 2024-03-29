@@ -46,6 +46,25 @@
   }
 }
 
+
+.points-full {
+  animation: invalidShake 0.2s none 0s infinite alternate;
+  box-shadow: 0 0 10px 1px rgb(123, 19, 19);
+}
+
+@keyframes invalidShake {
+  0% {
+   transform: translateX(-1px);
+  }
+  50% {
+    transform: translateX(1px);
+  }
+  100% {
+    transform: translateX(-1px);
+  }
+}
+
+
 @media (min-width: 800px) {
   .point-wallet-wrapper {
     position: absolute;
