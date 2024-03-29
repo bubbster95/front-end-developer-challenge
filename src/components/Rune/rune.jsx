@@ -17,7 +17,7 @@ function Rune({ purchased, runeId, path }) {
   };
 
   const handleClick = () => {
-    handleRuneUpdate(`path${path}`, runeId, 1);
+    handleRuneUpdate(`path${path}`, runeId, true);
   };
 
   return (
