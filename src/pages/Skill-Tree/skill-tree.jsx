@@ -30,7 +30,7 @@ function SkillTreePage() {
     console.log("Use Effect", runes);
     checkWallet();
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [runes]);
 
   const handleRuneUpdate = (path, runeId) => {
@@ -53,7 +53,8 @@ function SkillTreePage() {
     }
   };
 
-  const sellRune = (path, runeId) => { // Sell every rune after runeId
+  const sellRune = (path, runeId) => {
+    // Sell every rune after runeId
     let newValues = {};
 
     Object.keys(runes[path]).map(
@@ -86,17 +87,17 @@ function SkillTreePage() {
   };
 
   return (
-    <div className="skill-tree-page">
+    <div
+      className="skill-tree-page"
+      style={{ backgroundImage: 'url("assets/talent-calc-bg.png")' }}
+    >
       <RunesContext.Provider value={{ runes, handleRuneUpdate }}>
-        <div
-          className="skill-tree-wrapper"
-          style={{ backgroundImage: 'url("assets/talent-calc-bg.png")' }}
-        >
-          <TitleBar></TitleBar>
+        <TitleBar></TitleBar>
+        <div className="skill-tree-wrapper">
           <FullPath path="1"></FullPath>
           <FullPath path="2"></FullPath>
-          <PointWallet wallet={wallet}></PointWallet>
         </div>
+        <PointWallet wallet={wallet}></PointWallet>
       </RunesContext.Provider>
     </div>
   );

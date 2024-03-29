@@ -17,7 +17,7 @@ function Rune({ purchased, runeId, path }) {
   };
 
   const handleClick = (e) => {
-    console.log("Eeee: ", e)
+    console.log("Eeee: ", e);
     // TODO: make this detect right and left click
     handleRuneUpdate(`path${path}`, runeId);
   };

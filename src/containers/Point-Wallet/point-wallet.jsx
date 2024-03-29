@@ -9,7 +9,8 @@ function PointWallet({ wallet }) {
           {numArray.map((num) => {
             return (
               <p
-                style={{ // This function decides what number to display, allows for counter animation 
+                style={{
+                  // This function decides what number to display, allows for counter animation
                   transform: `translateY(-${
                     wallet.spent * 77 - (num > 4 ? 2 : 0)
                   }px)`,
