@@ -16,13 +16,15 @@ function Rune({ purchased, runeId, path }) {
     }px`,
   };
 
-  const handleClick = () => {
-    handleRuneUpdate(`path${path}`, runeId, true);
+  const handleClick = (e) => {
+    console.log("Eeee: ", e)
+    // TODO: make this detect right and left click
+    handleRuneUpdate(`path${path}`, runeId);
   };
 
   return (
     <div
-      onClick={handleClick}
+      onClick={(e) => handleClick(e)}
       className={`rune-wrapper  ${purchased === 1 && "active-rune-wrapper"}`}
     >
       <div

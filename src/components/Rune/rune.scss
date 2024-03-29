@@ -2,6 +2,7 @@ $rune-border: 6px;
 $rune-size: 50px;
 
 .rune-wrapper {
+    position: relative;
     width: $rune-size + $rune-border;
     height: $rune-size + $rune-border;
     background: linear-gradient(
@@ -16,7 +17,36 @@ $rune-size: 50px;
     margin: 10px;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
 }
+
+.rune-wrapper::after {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 100px;
+    height: 15px;
+    background-color: #fff;
+    transform: rotate(-45deg);
+    animation: sparkle 6s ease-in 1s infinite;
+}
+
+
+@keyframes sparkle {
+    0%{
+        bottom: 150%;
+    }
+    90% {
+        bottom: 150%;
+    }
+    97% {
+        bottom: 0px; 
+    }
+    100%{
+        bottom: -100px; 
+    }
+}
+
 
 .rune-border-color {
     z-index: 2;
@@ -28,8 +58,14 @@ $rune-size: 50px;
 }
 
 .rune-border-color-active {
-    background-color: rgb(0, 140, 255);
+    background-color: #008cff;
     opacity: 40%;
+    transition: background-color 1s ease-in-out;
+    animation: glow 3s ease-in-out s infinite;
+}
+
+@keyframes glow {
+    50% { background-color: #b2d6f4;}
 }
 
 .active-rune-wrapper {
@@ -46,7 +82,11 @@ $rune-size: 50px;
     background-size: inherit;
     box-shadow:
     inset 0 0 1px rgb(17, 17, 17),
-    inset 0 0 10px #202020,
+    inset 0 0 10px #202020;
+    transition: background-position-y .3s ease-in-out,
+    background-color 10s ease-in-out,
+    box-shadow 2s ease-in-out;
+    // transition-timing-function: ease-in-out;
 }
 
 .rune-icon:hover {
@@ -54,5 +94,10 @@ $rune-size: 50px;
 }
 
 .active-rune-icon:hover {
-    background-position-y: -50px !important;
+    // background-position-y: -50px !important;
+}
+
+.rune-icon:active {
+    transition: transform .1s ease-in;
+    transform: scale(.70);
 }
