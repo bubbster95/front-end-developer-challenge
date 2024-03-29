@@ -1,17 +1,39 @@
+import "./rune.scss";
 
-import './rune.scss';
+import { RunesContext } from "../../pages/Skill-Tree/skill-tree";
 
-function Rune({rune}) {
-    let runeXOffset = rune.id;
-    let runeYOffset = rune.purchased
-    let runeIconStyle = {
-        backgroundImage: 'url("assets/talent-icons-sprite.png")',
-        backgroundPosition: `-${50* (runeXOffset-1)}px ${50* (runeYOffset-1)}px`
-    }
+import { useContext } from "react";
+
+function Rune({ purchased, runeId, path }) {
+  let handleRuneUpdate = useContext(RunesContext).handleRuneUpdate;
+
+  let runeXOffset = JSON.parse(runeId);
+  let runeYOffset = purchased;
+  let runeIconStyle = {
+    backgroundImage: 'url("assets/talent-icons-sprite.png")',
+    backgroundPosition: `-${50 * (runeXOffset - 1)}px ${
+      50 * (runeYOffset - 1)
+    }px`,
+  };
+
+  const handleClick = () => {
+    handleRuneUpdate(`path${path}`, runeId, 1);
+  };
+
   return (
-    <div className={`rune-wrapper  ${rune.purchased === 1 && 'active-rune-wrapper'}`} >
-        <div className={`rune-icon ${rune.purchased === 1 && 'active-rune-icon'}`} style={runeIconStyle}></div>
-        <div className={`rune-border-color ${rune.purchased === 1 && 'rune-border-color-active'}`}></div>
+    <div
+      onClick={handleClick}
+      className={`rune-wrapper  ${purchased === 1 && "active-rune-wrapper"}`}
+    >
+      <div
+        className={`rune-icon ${purchased === 1 && "active-rune-icon"}`}
+        style={runeIconStyle}
+      ></div>
+      <div
+        className={`rune-border-color ${
+          purchased === 1 && "rune-border-color-active"
+        }`}
+      ></div>
     </div>
   );
 }

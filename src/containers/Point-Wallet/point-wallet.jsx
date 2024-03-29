@@ -1,12 +1,10 @@
 import './point-wallet.scss';
 
 
-function PointWallet() {
-    let spent = 3;
-    let total = 6
+function PointWallet({wallet}) {
   return (
     <div className="point-wallet-wrapper">
-        <div className='ratio'>{`${spent} / ${total}`}</div>
+        <div className='ratio'>{`${wallet.spent} / ${wallet.total}`}</div>
         <h3>Points Spent</h3>
     </div>
   );

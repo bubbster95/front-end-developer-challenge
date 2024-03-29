@@ -1,8 +1,8 @@
 import './gray-bar.scss';
 
-function GrayBar({runeArray}) {
+function GrayBar({runes}) {
   let runesPurchased = 0 
-  runeArray.map(rune => runesPurchased += rune.purchased)
+  Object.values(runes).map(rune => runesPurchased += rune)
 
   return (
     <div className="gray-bar">

@@ -9,12 +9,18 @@ import { RunesContext } from '../../pages/Skill-Tree/skill-tree';
 
 
 function FullPath({path}) {
-  let runeArray = useContext(RunesContext)
+  let runes = useContext(RunesContext).runes[`path${path}`]
+
+
   return (
     <div className="full-path">
         <h2 className='full-path-h2'>TALENT PATH {path}</h2>
-        {runeArray[path === '1'? 0:1].map( rune =>  <Rune key={`rune-${rune.id}`} rune={rune} ></Rune> )}
-        <GrayBar runeArray={runeArray[path === '1'? 0:1]}></GrayBar>
+        {Object.keys(runes).map( runeId => {
+          return <Rune key={`rune-${runeId}`} purchased={runes[runeId]} runeId={runeId} path={path}> </Rune>
+
+        }
+        )}
+        <GrayBar runes={runes}></GrayBar>
     </div>
   );
 }
