@@ -16,7 +16,7 @@ function PointWallet({ wallet }) {
                 style={{
                   // This function decides what number to display, allows for counter animation
                   transform: `translateY(-${
-                    wallet.spent * 77 - (num > 4 ? 2 : 0)
+                    (wallet.spent) * 28.5
                   }px)`,
                 }}
                 className={`spent ${num === wallet.spent && "spent-active"}`}

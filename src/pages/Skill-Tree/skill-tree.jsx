@@ -5,6 +5,8 @@ import { createContext, useEffect } from "react";
 import TitleBar from "../../containers/Title-Bar/title-bar";
 import FullPath from "../../containers/Full-Path/full-path";
 import PointWallet from "../../containers/Point-Wallet/point-wallet";
+import WelcomeModal from "../../containers/Welcome-Modal/welcome-modal";
+
 import { useState } from "react";
 
 export const RunesContext = createContext([]);
@@ -55,13 +57,10 @@ function SkillTreePage() {
       let frame = 0;
       let animationTimer = setInterval(() => {
         if (frame >= 30) {
-          console.log("exit Animation");
           setAnimateRune("");
           setPointsFull(false);
           clearInterval(animationTimer);
-        } else {
-          frame++;
-        }
+        } else frame++;
       }, 30);
     }
   };
@@ -104,6 +103,7 @@ function SkillTreePage() {
       className="skill-tree-page"
       style={{ backgroundImage: 'url("assets/talent-calc-bg.png")' }}
     >
+      {/* <WelcomeModal></WelcomeModal> */}
       <RunesContext.Provider
         value={{ runes, handleRuneUpdate, animateRune, pointsFull }}
       >
