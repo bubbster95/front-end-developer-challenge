@@ -75,7 +75,7 @@ With this solution we solve a number of problems at once
 2) Users only need to learn one `control perameter`cutting the "learning curve" in half and reducing frustration.
 3) Only one `click handler` function is needed keeping the code clean and dynamic.
 
-### How It Works
+#### How It Works
 
 The `click handler` function checks if the rune has already been purchased. Then `the handler` checks if the rune is a valid purchase option (ie. all previus runes on this path are bought). Lastly `the handler` checks if we have available points. 
 
@@ -87,3 +87,15 @@ With these three bits of info `the handler` triggers one of three main tasks
 
 Note: If the purchase is `invalid` due to lack of points, the `points box` will turn red and giggle too.
 
+
+## Reasoning For Sale Behavior
+
+It became clear that there were at least two logical ways to implement the sell feature, they are as follows.
+
+* Clicking last purchased rune sells it and returns a point. While clicking a rune in the middle of two blue runes is considered invalid.
+
+OR
+
+* Clicking any purchased rune sells it and all runes after. 
+
+I went with option two. It felt `simpler/cleaner` from a `UX` standpoint. We would have needed to warn the user of the `invalid action`. This adds needless friction and forces them users to adhere to an `extra constraint`. Restricting the users ability and forcing them to sell the runes in order `might even confuse` them. I can imagine a user furiously clicking the first rune saying "I want to go back!". Better to avoid this by letting them choose to sell one in order `OR` multiple.

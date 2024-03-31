@@ -5,8 +5,6 @@ import { createContext, useEffect } from "react";
 import TitleBar from "../../containers/Title-Bar/title-bar";
 import FullPath from "../../containers/Full-Path/full-path";
 import PointWallet from "../../containers/Point-Wallet/point-wallet";
-import WelcomeModal from "../../containers/Welcome-Modal/welcome-modal";
-
 import { useState } from "react";
 
 export const RunesContext = createContext([]);
