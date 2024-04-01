@@ -1,6 +1,6 @@
 import "./App.css";
 
-import SkillTreePage from "./pages/Skill-Tree/skill-tree";
+import SkillTreePage from "./pages/SkillTree";
 
 function App() {
   // Supress progress bar animation on window resize.

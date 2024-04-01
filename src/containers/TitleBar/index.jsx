@@ -1,4 +1,4 @@
-import './title-bar.scss'
+import './index.scss'
 
 function TitleBar() {
   return (

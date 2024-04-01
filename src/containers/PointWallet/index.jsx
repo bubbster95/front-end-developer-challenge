@@ -1,6 +1,6 @@
-import "./point-wallet.scss";
+import "./index.scss";
 
-import { RunesContext } from "../../pages/Skill-Tree/skill-tree";
+import { RunesContext } from "../../pages/SkillTree";
 import { useContext } from "react";
 
 function PointWallet({ wallet }) {

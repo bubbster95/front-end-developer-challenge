@@ -1,6 +1,6 @@
-import "./rune.scss";
+import "./index.scss";
 
-import { RunesContext } from "../../pages/Skill-Tree/skill-tree";
+import { RunesContext } from "../../pages/SkillTree";
 
 import { useContext } from "react";
 
@@ -18,9 +18,9 @@ function Rune({ rune }) {
   return (
     <div
       onClick={() => handleRuneUpdate(rune.id)}
-      className={`rune-wrapper  ${rune.purchased === 1 && "active-rune-wrapper"} ${
-        animateRune === rune.id && "invalid-rune"
-      }`}
+      className={`rune-wrapper  ${
+        rune.purchased === 1 && "active-rune-wrapper"
+      } ${animateRune === rune.id && "invalid-rune"}`}
     >
       <div
         className={`rune-icon ${rune.purchased === 1 && "active-rune-icon"}`}

@@ -1,9 +1,9 @@
-import "./full-path.scss";
-import GrayBar from "../../components/Gray-Bar/gray-bar";
-import Rune from "../../components/Rune/rune";
+import "./index.scss";
+import GrayBar from '../../components/GrayBar'
+import Rune from "../../components/Rune";
 import { useContext } from "react";
 
-import { RunesContext } from "../../pages/Skill-Tree/skill-tree";
+import { RunesContext } from "../../pages/SkillTree";
 
 function FullPath({ path, index }) {
   let runes = useContext(RunesContext).runes;

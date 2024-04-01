@@ -1,4 +1,4 @@
-import "./gray-bar.scss";
+import "./index.scss";
 
 function GrayBar({ runesOnPath }) {
   let runesPurchased = 0;

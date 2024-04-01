@@ -1,14 +1,14 @@
-import "./skill-tree.scss";
+import "./index.scss";
 
-import { createContext, useEffect } from "react";
+import { createContext, useEffect, useState } from "react";
 
-import TitleBar from "../../containers/Title-Bar/title-bar";
-import FullPath from "../../containers/Full-Path/full-path";
-import PointWallet from "../../containers/Point-Wallet/point-wallet";
-import { useState } from "react";
+import TitleBar from "../../containers/TitleBar";
+import FullPath from "../../containers/FullPath";
+import PointWallet from "../../containers/PointWallet";
 
 import pathsConfig from "../../configs/paths.json";
 import runesConfig from "../../configs/runes.json";
+
 
 export const RunesContext = createContext([]);
 
@@ -33,7 +33,7 @@ function SkillTreePage() {
   const purchaseRune = (thisRune) => {
     const totalSpent = checkWallet();
     const newRuneState = [...runes]; // Creat mutable object to replace state later
-    const runeIndex = findObjIndex(newRuneState, 'id', thisRune.id); // Finds the index of our rune data
+    const runeIndex = findObjIndex(newRuneState, "id", thisRune.id); // Finds the index of our rune data
     if (validateRunePurchase(thisRune) && totalSpent < wallet.total) {
       // Valid rune purchase
       thisRune.purchased = 1;
@@ -58,23 +58,25 @@ function SkillTreePage() {
 
   const sellRune = (thisRune) => {
     const newRuneState = [...runes];
-    const thisPath = findPath(thisRune.id).runesOnPath
+    const thisPath = findPath(thisRune.id).runesOnPath;
 
-    let runeIndex = thisPath.findIndex((r) => r === thisRune.id)
+    let runeIndex = thisPath.findIndex((r) => r === thisRune.id);
 
     // Sell every rune after runeId
-    thisPath.map( (runeId, index) => {
-      if (index >= runeIndex) newRuneState[findObjIndex(newRuneState, 'id', runeId)].purchased = 0
-      return null
-    } );
+    thisPath.map((runeId, index) => {
+      if (index >= runeIndex)
+        newRuneState[findObjIndex(newRuneState, "id", runeId)].purchased = 0;
+      return null;
+    });
 
     setRunes(newRuneState);
   };
 
+  // TODO: export helper functions from a util file to simplify the main component and seperate concerns
   /******************
    * Helper functions *
    *******************/
-
+ 
   // Tallys runes purchased on the path, compares tally+1 to pathIndex.
   // If the numbers match the rune is a valid selection
   const validateRunePurchase = (thisRune) => {
@@ -82,12 +84,12 @@ function SkillTreePage() {
     let thisPath = findPath(thisRune.id);
     let indexOnPath = 0;
     let purchases = thisPath.runesOnPath.map((runeId, index) => {
-      let runeData = findRuneData(runeId)
-      if (runeData.id === thisRune.id) indexOnPath = index
-      return runeData.purchased
+      let runeData = findRuneData(runeId);
+      if (runeData.id === thisRune.id) indexOnPath = index;
+      return runeData.purchased;
     });
     // If the rune index is equal to the amount of runes purchased it is a valid purchase.
-    return (indexOnPath === purchases.reduce((a,b)=> a+b, 0))
+    return indexOnPath === purchases.reduce((a, b) => a + b, 0);
   };
 
   // Check number of runes bought in total
@@ -106,11 +108,13 @@ function SkillTreePage() {
   };
 
   // Get the data of a particular rune
-  const findRuneData = runeId => runes.find((obj) => obj.id === runeId)
+  const findRuneData = (runeId) => runes.find((obj) => obj.id === runeId);
   // Find the path that a particular rune lives on
-  const findPath = runeId => paths.find((p) =>  p.runesOnPath.includes(runeId))
+  const findPath = (runeId) =>
+    paths.find((p) => p.runesOnPath.includes(runeId));
   // Finds the index of an item in an array of object based on the value passed in
-  const findObjIndex = (array, key, value) => array.findIndex(obj => obj[key] === value)
+  const findObjIndex = (array, key, value) =>
+    array.findIndex((obj) => obj[key] === value);
 
   return (
     <div
