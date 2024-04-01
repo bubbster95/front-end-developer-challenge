@@ -7,50 +7,43 @@ import FullPath from "../../containers/Full-Path/full-path";
 import PointWallet from "../../containers/Point-Wallet/point-wallet";
 import { useState } from "react";
 
+import pathsConfig from "../../configs/paths.json";
+import runesConfig from "../../configs/runes.json";
+
 export const RunesContext = createContext([]);
 
 function SkillTreePage() {
   const [wallet, setWallet] = useState({ spent: 0, total: 6 });
   const [animateRune, setAnimateRune] = useState({ runeId: "" });
   const [pointsFull, setPointsFull] = useState(false);
-  const [runes, setRunes] = useState({
-    path1: {
-      1: 0,
-      2: 0,
-      3: 0,
-      4: 0,
-    },
-    path2: {
-      5: 0,
-      6: 0,
-      7: 0,
-      8: 0,
-    },
-  });
+  const [runes, setRunes] = useState(runesConfig.runes);
+  const [paths] = useState(pathsConfig.paths);
 
   useEffect(() => {
     checkWallet();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [runes]);
 
-  const handleRuneUpdate = (path, runeId) => {
-    if (runes[path][runeId] === 0) purchaseRune(path, runeId);
-    else sellRune(path, runeId);
+  const handleRuneUpdate = (runeId) => {
+    let thisRune = findRuneData(runeId);
+    if (thisRune.purchased === 0) purchaseRune(thisRune);
+    else sellRune(thisRune);
   };
 
-  const purchaseRune = (path, runeId) => {
+  const purchaseRune = (thisRune) => {
     const totalSpent = checkWallet();
-    if (
-      validateRunePurchase(path, runeId, totalSpent) &&
-      totalSpent < wallet.total
-    ) {
+    const newRuneState = [...runes]; // Creat mutable object to replace state later
+    const runeIndex = findObjIndex(newRuneState, 'id', thisRune.id); // Finds the index of our rune data
+    if (validateRunePurchase(thisRune) && totalSpent < wallet.total) {
       // Valid rune purchase
+      thisRune.purchased = 1;
+      newRuneState[runeIndex] = thisRune;
       setWallet({ spent: totalSpent + 1, total: 6 });
-      setRunes({ ...runes, [path]: { ...runes[path], [runeId]: 1 } });
+      setRunes(newRuneState);
     } else {
       // Invalid Rune Purchase
       if (totalSpent >= wallet.total) setPointsFull(true);
-      setAnimateRune(runeId);
+      setAnimateRune(thisRune.id);
 
       let frame = 0;
       let animationTimer = setInterval(() => {
@@ -63,15 +56,19 @@ function SkillTreePage() {
     }
   };
 
-  const sellRune = (path, runeId) => {
+  const sellRune = (thisRune) => {
+    const newRuneState = [...runes];
+    const thisPath = findPath(thisRune.id).runesOnPath
+
+    let runeIndex = thisPath.findIndex((r) => r === thisRune.id)
+
     // Sell every rune after runeId
-    let newValues = {};
+    thisPath.map( (runeId, index) => {
+      if (index >= runeIndex) newRuneState[findObjIndex(newRuneState, 'id', runeId)].purchased = 0
+      return null
+    } );
 
-    Object.keys(runes[path]).map(
-      (key) => (newValues[key] = JSON.parse(key) < JSON.parse(runeId) ? 1 : 0)
-    );
-
-    setRunes({ ...runes, [path]: newValues });
+    setRunes(newRuneState);
   };
 
   /******************
@@ -80,21 +77,40 @@ function SkillTreePage() {
 
   // Tallys runes purchased on the path, compares tally+1 to pathIndex.
   // If the numbers match the rune is a valid selection
-  const validateRunePurchase = (path, runeId) => {
-    let totalRuns = Object.values(runes[path]).reduce((a, b) => a + b);
-    let pathIndex =
-      path === "path2" ? JSON.parse(runeId - 4) : JSON.parse(runeId);
-    return totalRuns + 1 === pathIndex;
+  const validateRunePurchase = (thisRune) => {
+    // Find the rune path and index of rune on that path
+    let thisPath = findPath(thisRune.id);
+    let indexOnPath = 0;
+    let purchases = thisPath.runesOnPath.map((runeId, index) => {
+      let runeData = findRuneData(runeId)
+      if (runeData.id === thisRune.id) indexOnPath = index
+      return runeData.purchased
+    });
+    // If the rune index is equal to the amount of runes purchased it is a valid purchase.
+    return (indexOnPath === purchases.reduce((a,b)=> a+b, 0))
   };
 
   // Check number of runes bought in total
   const checkWallet = () => {
-    let path1 = Object.values(runes.path1).reduce((a, b) => a + b, 0);
-    let path2 = Object.values(runes.path2).reduce((a, b) => a + b, 0);
+    let runeIds = [];
+    paths.map((thisPath) => (runeIds = [...runeIds, ...thisPath.runesOnPath]));
 
-    setWallet({ spent: path1 + path2, total: 6 });
-    return path1 + path2;
+    let purchasedRuneCount = 0;
+    runeIds.map(
+      (runeId) =>
+        (purchasedRuneCount += runes.find((r) => r.id === runeId).purchased)
+    );
+
+    setWallet({ spent: purchasedRuneCount, total: 6 });
+    return purchasedRuneCount;
   };
+
+  // Get the data of a particular rune
+  const findRuneData = runeId => runes.find((obj) => obj.id === runeId)
+  // Find the path that a particular rune lives on
+  const findPath = runeId => paths.find((p) =>  p.runesOnPath.includes(runeId))
+  // Finds the index of an item in an array of object based on the value passed in
+  const findObjIndex = (array, key, value) => array.findIndex(obj => obj[key] === value)
 
   return (
     <div
@@ -107,8 +123,15 @@ function SkillTreePage() {
       >
         <TitleBar></TitleBar>
         <div className="skill-tree-wrapper">
-          <FullPath path="1"></FullPath>
-          <FullPath path="2"></FullPath>
+          {paths.map((path, index) => (
+            <FullPath
+              key={`path-${path.id}`}
+              path={path}
+              index={index}
+            ></FullPath>
+          ))}
+          {/* <FullPath path="1"></FullPath>
+          <FullPath path="2"></FullPath> */}
         </div>
         <PointWallet wallet={wallet}></PointWallet>
       </RunesContext.Provider>

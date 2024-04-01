@@ -12,6 +12,7 @@ Players of TitanStar Legends can spend talent points that they’ve collected on
     - For example: The user may not put a point in the cake without first having put points in the chevrons and the silverware (in that order).
 
 ## Future Features
+* Refactor runes state object to reflect a more scalable infrastructure. Add rune branching
 * Suppress path `transition` when windowsize is changed.
 * Animation on page entry.
 * Routing, `if other pages are added`.

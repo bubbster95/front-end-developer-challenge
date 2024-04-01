@@ -1,8 +1,9 @@
 import "./gray-bar.scss";
 
-function GrayBar({ runes }) {
+function GrayBar({ runesOnPath }) {
   let runesPurchased = 0;
-  Object.values(runes).map((rune) => (runesPurchased += rune));
+
+  runesOnPath.map((rune) => (runesPurchased += rune.purchased));
 
   return (
     <div className="gray-bar">

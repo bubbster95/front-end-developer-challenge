@@ -1,0 +1,14 @@
+{
+    "paths": [
+        {
+          "id": "path1",
+          "runesOnPath": ["chevrons", "silverware", "cake", "crown"],
+          "title": "TALENT PATH 1"
+        },
+        {
+          "id": "path2",
+          "runesOnPath": ["boat", "scuba", "shock", "skull"],
+          "title": "TALENT PATH 2"
+        }
+      ]
+}

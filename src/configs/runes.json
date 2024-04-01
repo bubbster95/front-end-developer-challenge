@@ -1,0 +1,60 @@
+{
+    "runes": [
+        {
+            "id": "chevrons",
+            "purchased": 0,
+            "spriteOffset": 1,
+            "spriteSheetURL": "assets/talent-icons-sprite.png",
+            "price": 1
+        },
+        {
+            "id": "silverware",
+            "purchased": 0,
+            "spriteOffset": 2,
+            "spriteSheetURL": "assets/talent-icons-sprite.png",
+            "price": 1
+        },
+        {
+            "id": "cake",
+            "purchased": 0,
+            "spriteOffset": 3,
+            "spriteSheetURL": "assets/talent-icons-sprite.png",
+            "price": 1
+        },
+        {
+            "id": "crown",
+            "purchased": 0,
+            "spriteOffset": 4,
+            "spriteSheetURL": "assets/talent-icons-sprite.png",
+            "price": 1
+        },
+        {
+            "id": "boat",
+            "purchased": 0,
+            "spriteOffset": 5,
+            "spriteSheetURL": "assets/talent-icons-sprite.png",
+            "price": 1
+        },
+        {
+            "id": "scuba",
+            "purchased": 0,
+            "spriteOffset": 6,
+            "spriteSheetURL": "assets/talent-icons-sprite.png",
+            "price": 1
+        },
+        {
+            "id": "shock",
+            "purchased": 0,
+            "spriteOffset": 7,
+            "spriteSheetURL": "assets/talent-icons-sprite.png",
+            "price": 1
+        },
+        {
+            "id": "skull",
+            "purchased": 0,
+            "spriteOffset": 8,
+            "spriteSheetURL": "assets/talent-icons-sprite.png",
+            "price": 1
+        }
+    ]
+}
