@@ -120,8 +120,8 @@ function SkillTreePage() {
     <div
       className="skill-tree-page"
       style={{ backgroundImage: 'url("assets/talent-calc-bg.png")' }}
+      data-testid='skill-tree-page'
     >
-      {/* <WelcomeModal></WelcomeModal> */}
       <RunesContext.Provider
         value={{ runes, handleRuneUpdate, animateRune, pointsFull }}
       >
@@ -134,8 +134,6 @@ function SkillTreePage() {
               index={index}
             ></FullPath>
           ))}
-          {/* <FullPath path="1"></FullPath>
-          <FullPath path="2"></FullPath> */}
         </div>
         <PointWallet wallet={wallet}></PointWallet>
       </RunesContext.Provider>

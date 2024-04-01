@@ -17,6 +17,7 @@ Players of TitanStar Legends can spend talent points that they’ve collected on
 * Routing, `if other pages are added`.
     * Create 404 page.
 * Confirmation popup before purchase / sale of runes
+* Add better coverage on testing to include functional tests.
 
 ## Create React App
 

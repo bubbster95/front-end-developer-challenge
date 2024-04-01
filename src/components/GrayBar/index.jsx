@@ -6,8 +6,8 @@ function GrayBar({ runesOnPath }) {
   runesOnPath.map((rune) => (runesPurchased += rune.purchased));
 
   return (
-    <div className="gray-bar">
-      <div className={`progress progress-${runesPurchased - 1}`}></div>
+    <div className="gray-bar" data-testid="gray-bar">
+      <div className={`progress progress-${runesPurchased - 1}`} data-testid="progress-bar"></div>
     </div>
   );
 }
