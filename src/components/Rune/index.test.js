@@ -15,7 +15,6 @@ describe('Rune', () => {
     const runeBorderColor = screen.getByTestId(/rune-border-color/i)
     const runeWrapper = screen.getByTestId(/rune-wrapper/i)
     
-
     expect(runeIcon).toBeInTheDocument();
     expect(runeBorderColor).toBeInTheDocument();
     expect(runeWrapper).toBeInTheDocument();
